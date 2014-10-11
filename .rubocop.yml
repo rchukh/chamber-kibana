@@ -1,0 +1,7 @@
+AllCops:
+  Exclude:
+    - node_modules/**/*
+    - metadata.rb
+
+LineLength:
+  Max: 120

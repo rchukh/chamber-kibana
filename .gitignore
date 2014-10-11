@@ -1,0 +1,31 @@
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+pkg/
+
+# Berkshelf
+.vagrant
+/cookbooks
+Berksfile.lock
+
+# Bundler
+Gemfile.lock
+bin/*
+.bundle/*
+
+.kitchen/
+.kitchen.local.yml
+
+# Existing custom vagrant boxes
+.boxes/*
+!.boxes/README.md
+
+# NodeJS modules
+node_modules/
+
+# Vendors static files
+files/default/vendor/*
+!files/default/vendor/README.md

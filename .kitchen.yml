@@ -1,0 +1,42 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+  vagrantfile_erb: .kitchen.Vagrantfile.erb
+  plugins:
+    cachier:
+      cache:
+        scope: ":box"
+        auto_detect: false
+        enable:
+          - yum
+        generic_buckets:
+          - ['chef', '/var/chef/cache']
+  network:
+  - ["forwarded_port", {guest: 80, host: 8080}]
+  - ["forwarded_port", {guest: 5601, host: 8081}]
+  customize:
+    memory: 512
+
+provisioner:
+  name: chef_solo
+  solo_rb:
+      ssl_verify_mode: verify_peer
+      file_cache_path: '/var/chef/cache/'
+
+platforms:
+  - name: centos-6.5
+
+suites:
+  - name: default
+    run_list:
+      - recipe[java::default]
+      - recipe[chamber-kibana::default]
+    attributes:
+      java:
+        jdk_version: '7'
+      kibana:
+        file:
+          url: 'https://download.elasticsearch.org/kibana/kibana/kibana-4.0.0-BETA1.1.tar.gz'
+          version: '4.0.0-BETA1.1'
+          checksum: '0010e467d598b67ba442c2edc5c6df196e8734f826044a58e0da3490a1bb587a'
