@@ -1,0 +1,168 @@
+#!/usr/bin/env bash
+#
+# kibana
+#
+<% if node.platform_family?('debian') %>
+### BEGIN INIT INFO
+# Provides:          kibana
+# Required-Start:    $network $named
+# Required-Stop:     $network $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts kibana
+# Description:       Starts kibana using start-stop-daemon
+### END INIT INFO
+<% else %>
+# chkconfig:   - 57 47
+# description: kibana
+# processname: kibana
+# config:      <%= node.kibana['path']['conf'] %>/kibana.yml
+<% end %>
+
+# Source networking configuration
+#
+if [ -f /etc/sysconfig/network ]; then source /etc/sysconfig/network; fi
+
+# Exit if networking is not up
+#
+[ "$NETWORKING" = "no" ] && exit
+
+PIDFILE='<%= node.kibana['pid_file'] %>'
+CHECK_PID_RUNNING=$(ps axf | grep 'java' | grep 'kibana' | grep -v grep | awk '{print $1}')
+
+
+start() {
+    if [ -f "$PIDFILE" ]; then
+      # PIDFILE EXISTS -- Kibana RUNNING?
+      echo -e "PID file found in $PIDFILE"
+      kibana_pid="$(cat $PIDFILE)"
+      pid_running="$( ps ax | grep 'java' | grep $kibana_pid )"
+
+      if [ ! -z "$pid_running" ] ; then
+        # EXIT IF Kibana IS ALREADY RUNNING
+	      echo -e "\033[31;1mPID $kibana_pid still alive, Kibana already running...\033[0m"
+	      return 1
+      fi
+    fi
+
+    echo -en "\033[1mStarting Kibana...\033[0m"
+    touch $PIDFILE && chown <%= node.kibana['user'] %> $PIDFILE
+    <% if node.platform_family == 'debian' %>
+      # TODO: Fix. Won't work, because of '-p' parameter
+      start-stop-daemon --background --start --quiet --pidfile $PIDFILE --chuid <%= node.kibana['user'] %> --exec <%= node.kibana['bindir'] %>/kibana -- -p $PIDFILE
+    <% else %>
+      su <%= node.kibana['user'] %> -c "nohup <%= node.kibana['bindir'] %>/kibana > <%= node.kibana['path']['logs'] %>/kibana.log 2>&1 & echo \$! > $PIDFILE"
+    <% end %>
+
+    if [ $? ]; then
+      echo -e " \e[32m[OK]\e[0m"
+    else
+      echo -e " \e[31m[FAILURE]\e[0m"
+    fi
+
+    return $?
+}
+
+stop() {
+    if [[ -f $PIDFILE ]]; then
+      echo -n -e "\033[1mStopping kibana...\033[0m"
+
+      # REMOVE PIDFILE AND EXIT IF PROCESS NOT RUNNING
+      if [ ! $CHECK_PID_RUNNING ]; then
+        echo -e "\033[1mPID file found, but no matching process running?\033[0m"
+        echo    "Removing PID file..."
+        rm $PIDFILE
+        exit 0
+      fi
+
+      # KILL PROCESS
+      pid=$(cat $PIDFILE)
+      su <%= node.kibana['user'] %> -m -c "kill $(cat $PIDFILE)"
+      r=$?
+
+      # Check for process
+      timeout=0
+      while [ $(ps -p $pid | wc -l ) -gt '1' ]; do
+        echo -n '.'
+        (( timeout ++))
+        if [ $timeout -gt '30' ]; then return; fi
+        sleep 1
+      done
+
+      # Check for pidfile
+      timeout=0
+      while [ -f $PIDFILE  ]; do
+        echo -n '.'
+        (( timeout++ ))
+        if [ $timeout -gt '15' ]; then return; fi
+        sleep 1
+      done
+
+      echo;
+
+      return $r
+    else
+      echo -e "\033[1mNo PID file found -- kibana not running?\033[0m"
+    fi
+}
+
+restart() {
+    stop
+    timeout=30
+    while ps aux | grep 'java' | grep -e "kibana.pidfile"; do
+      echo -n '.'
+      (( timeout-- ))
+      if [ $timeout -lt '1' ]; then return; fi
+      sleep 1
+    done;
+    start
+}
+
+status() {
+  # GOT PIDFILE?
+  [ -f $PIDFILE ] && pid=$(cat $PIDFILE)
+
+  # RUNNING
+  if [[ $pid && -d "/proc/$pid" ]]; then
+    echo -e "\033[1;37;46mkibana running with PID $pid\033[0m"
+    # INCORRECT PID?
+    if [ "$pid" != "$CHECK_PID_RUNNING" ]; then
+      echo -e "\033[1;31;40m[!] Incorrect PID found in $PIDFILE: $pid\033[0m"
+      return 1
+    fi
+    return 0
+  fi
+
+  # NOT RUNNING
+  if [[ ! $pid || ! -d "/proc/$pid" ]]; then
+    echo -e "\033[1;33;40mkibana not running\033[0m"
+    return 3
+  fi
+
+  # STALE PID FOUND
+  if [[ ! -d "/proc/$pid" && -f $PIDFILE ]]; then
+    echo -e "\033[1;31;40m[!] Stale PID found in $PIDFILE\033[0m"
+    return 1
+  fi
+}
+
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        restart
+        ;;
+  status)
+        status $2
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|status [-v]|}"
+        exit 1
+esac
+
+exit $?

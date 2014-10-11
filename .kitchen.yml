@@ -13,7 +13,7 @@ driver_config:
         generic_buckets:
           - ['chef', '/var/chef/cache']
   network:
-  - ["forwarded_port", {guest: 80, host: 8080}]
+  # Kibana (should be the same as used for Kibana, defaults to 5601)
   - ["forwarded_port", {guest: 5601, host: 8081}]
   customize:
     memory: 512
@@ -31,12 +31,11 @@ suites:
   - name: default
     run_list:
       - recipe[java::default]
+      - recipe[elasticsearch::default]
       - recipe[chamber-kibana::default]
     attributes:
       java:
         jdk_version: '7'
-      kibana:
-        file:
-          url: 'https://download.elasticsearch.org/kibana/kibana/kibana-4.0.0-BETA1.1.tar.gz'
-          version: '4.0.0-BETA1.1'
-          checksum: '0010e467d598b67ba442c2edc5c6df196e8734f826044a58e0da3490a1bb587a'
+      elasticsearch:
+        version: '1.4.0.Beta1'
+        allocated_memory: '128m'
