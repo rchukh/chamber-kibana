@@ -4,4 +4,4 @@ AllCops:
     - metadata.rb
 
 LineLength:
-  Max: 120
+  Max: 160
