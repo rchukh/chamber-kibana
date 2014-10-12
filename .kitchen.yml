@@ -30,6 +30,15 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[chamber-kibana::default]
+    attributes:
+      java:
+        jdk_version: '7'
+      elasticsearch:
+        version: '1.4.0.Beta1'
+        allocated_memory: '128m'
+  - name: without_deps
+    run_list:
       - recipe[java::default]
       - recipe[elasticsearch::default]
       - recipe[chamber-kibana::default]
@@ -39,3 +48,7 @@ suites:
       elasticsearch:
         version: '1.4.0.Beta1'
         allocated_memory: '128m'
+      kibana:
+        dependency:
+          install_java: false
+          install_elasticsearch: false

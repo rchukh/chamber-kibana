@@ -8,6 +8,11 @@ default['kibana']['repository']    = 'kibana/kibana'
 default['kibana']['filename']      = "kibana-#{node['kibana']['version']}.tar.gz"
 default['kibana']['download_url']  = [node['kibana']['host'], node['kibana']['repository'], node['kibana']['filename']].join('/')
 
+# === DEPENDENCIES
+#
+default['kibana']['dependency']['install_java']          = true
+default['kibana']['dependency']['install_elasticsearch'] = true
+
 # === NAMING
 #
 default['kibana']['node']['name']    = node.name
