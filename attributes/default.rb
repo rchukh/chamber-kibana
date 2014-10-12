@@ -28,11 +28,10 @@ default['kibana']['pid_file']  = "#{node['kibana']['pid_path']}/kibana-#{node['k
 
 default['kibana']['templates']['kibana_yml'] = 'kibana.yml.erb'
 
-##
-# Kibana instance configurations
-##
-# === PORT
+# === Kibana instance configurations
 #
+default['kibana']['java_opts'] = '-Xms128m -Xmx128m $JAVA_OPTS'
+# Kibana Port
 default['kibana']['http']['port'] = 5601
 # The Elasticsearch instance to use
 default['kibana']['elasticsearch']['server'] = 'http://127.0.0.1:9200'
