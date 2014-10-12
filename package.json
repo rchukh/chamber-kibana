@@ -1,7 +1,7 @@
 {
   "name": "chamber-kibana",
   "repository": "https://github.com/rchukh/chamber-kibana",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "devDependencies": {
     "grunt": "latest",
     "grunt-conventional-changelog": "latest"
