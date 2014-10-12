@@ -1,3 +1,12 @@
+<a name="0.1.1"></a>
+### 0.1.1 (2014-10-12)
+
+
+#### Bug Fixes
+
+* attributes for dependency installation are not checked correctly ([aa78fe5f](https://github.com/rchukh/chamber-kibana/commit/aa78fe5fc6a4188d55b756bef4c91c94757032e7), closes [#9](https://github.com/rchukh/chamber-kibana/issues/9))
+
+
 <a name="0.1.0"></a>
 ## 0.1.0 (2014-10-12)
 
