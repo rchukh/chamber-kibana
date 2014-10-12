@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - bin/**/*
     - node_modules/**/*
     - metadata.rb
 
