@@ -5,8 +5,8 @@ default['kibana']['version']       = '4.0.0-BETA1.1'
 default['kibana']['checksum']      = '0010e467d598b67ba442c2edc5c6df196e8734f826044a58e0da3490a1bb587a'
 default['kibana']['host']          = 'http://download.elasticsearch.org'
 default['kibana']['repository']    = 'kibana/kibana'
-default['kibana']['filename']      = "kibana-#{node['kibana']['version']}.tar.gz"
-default['kibana']['download_url']  = [node['kibana']['host'], node['kibana']['repository'], node['kibana']['filename']].join('/')
+default['kibana']['filename']      = nil
+default['kibana']['download_url']  = nil
 
 # === DEPENDENCIES
 #
