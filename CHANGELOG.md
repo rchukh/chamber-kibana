@@ -1,3 +1,12 @@
+<a name="0.1.2"></a>
+### 0.1.2 (2014-10-18)
+
+
+#### Features
+
+* compute download url in recipe, not in attributes ([65809184](https://github.com/rchukh/chamber-kibana/commit/65809184547e56faf5c36605f36851a9c46b5090), closes [#11](https://github.com/rchukh/chamber-kibana/issues/11))
+
+
 <a name="0.1.1"></a>
 ### 0.1.1 (2014-10-12)
 
