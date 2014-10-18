@@ -60,8 +60,11 @@ end
 ark_prefix_root = node['kibana']['dir'] || node['ark']['prefix_root']
 ark_prefix_home = node['kibana']['dir'] || node['ark']['prefix_home']
 
+filename = node['kibana']['filename'] || "kibana-#{node['kibana']['version']}.tar.gz"
+download_url = node['kibana']['download_url'] || [node['kibana']['host'], node['kibana']['repository'], filename].join('/')
+
 ark 'kibana' do
-  url node['kibana']['download_url']
+  url download_url
   owner node['kibana']['user']
   group node['kibana']['user']
   version node['kibana']['version']
