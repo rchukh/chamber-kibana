@@ -7,8 +7,12 @@ include_recipe 'chef-sugar::default'
 if node['kibana']['dependency']['install_java']
   include_recipe 'java::default'
 else
-  unless installed?('java')
-    fail 'Java is missing. It is not installed and it is excluded for installation.'
+  ruby_block 'check_java' do
+    block do
+      fail 'Java is missing. It is not installed and it is excluded for installation.'
+    end
+    action :run
+    not_if { installed?('java') }
   end
 end
 

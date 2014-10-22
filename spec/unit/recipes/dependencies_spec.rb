@@ -36,13 +36,14 @@ describe 'chamber-kibana::dependencies' do
       end
 
       if dependency == 'java'
-        it 'raises an error if java is not presented on the system' do
-          allow_any_instance_of(Chef::Recipe).to receive(:installed?).and_return(false)
-          expect { chef_run.converge }.to raise_error
+        it 'runs a check_java ruby_block if java is not presented on the system' do
+          allow_any_instance_of(Chef::Resource).to receive(:installed?).and_return(false)
+          expect(chef_run).to run_ruby_block('check_java')
         end
-        it 'does not raise an error if java is presented on the system' do
+
+        it 'does not run a check_java ruby_block if java is presented on the system' do
           allow_any_instance_of(Chef::Recipe).to receive(:installed?).and_return(true)
-          expect { chef_run.converge }.to_not raise_error
+          expect(chef_run).to_not run_ruby_block('check_java')
         end
       end
     end
