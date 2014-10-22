@@ -5,3 +5,5 @@ RSpec.configure do |config|
   # Specify the Chef log_level (default: :warn)
   config.log_level = :warn
 end
+
+ChefSpec::Coverage.start!
