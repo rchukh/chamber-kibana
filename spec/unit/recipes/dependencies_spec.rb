@@ -4,9 +4,7 @@ describe 'chamber-kibana::dependencies' do
   let(:platform) { 'centos' }
   let(:platform_version) { '6.5' }
   let(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: platform, version: platform_version) do |node|
-      node.automatic['memory']['total']   = '512MB'
-    end.converge(described_recipe)
+    ChefSpec::SoloRunner.new(platform: platform, version: platform_version).converge(described_recipe)
   end
 
   it 'should include the chef-sugar recipe' do
@@ -17,7 +15,6 @@ describe 'chamber-kibana::dependencies' do
     context "when #{dependency} installation is enabled" do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: platform, version: platform_version) do |node|
-          node.automatic[:memory][:total]   = '512MB'
           node.set['kibana']['dependency']["install_#{dependency}"] = true
         end.converge(described_recipe)
       end
@@ -30,7 +27,6 @@ describe 'chamber-kibana::dependencies' do
     context "when #{dependency} installation is disabled" do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: platform, version: platform_version) do |node|
-          node.automatic[:memory][:total]   = '512MB'
           node.set['kibana']['dependency']["install_#{dependency}"] = false
         end.converge(described_recipe)
       end
