@@ -5,10 +5,7 @@
 include_recipe 'chef-sugar::default'
 require 'chef/sugar/core_extensions'
 
-unless centos?
-  Chef::Application.fatal!('Cookbook is incompatible with #{platform_family?}')
-end
-
+fail "Cookbook is incompatible with #{platform_family?}" unless centos?
 if node['kibana']['user'].blank?
-  Chef::Application.fatal!('Kibana user/group ownership attributes are missing')
+  fail 'Kibana user/group ownership attributes are missing'
 end
