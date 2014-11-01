@@ -33,6 +33,11 @@ default['kibana']['pid_file']  = "#{node['kibana']['pid_path']}/kibana-#{node['k
 
 default['kibana']['templates']['kibana_yml'] = 'kibana.yml.erb'
 
+# === Service
+#
+default['kibana']['skip_start']   = false
+default['kibana']['skip_restart'] = false
+
 # === Kibana instance configurations
 #
 default['kibana']['java_opts'] = '-Xms128m -Xmx128m $JAVA_OPTS'

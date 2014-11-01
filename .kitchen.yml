@@ -14,7 +14,7 @@ driver_config:
           - ['chef', '/var/chef/cache']
   network:
   # Kibana (should be the same as used for Kibana, defaults to 5601)
-  - ["forwarded_port", {guest: 5601, host: 8081}]
+  #- ["forwarded_port", {guest: 5601, host: 8081}]
   customize:
     memory: 512
 

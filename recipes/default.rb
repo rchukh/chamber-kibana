@@ -8,13 +8,15 @@ include_recipe 'ark'
 
 # Create user and group
 #
-group node['kibana']['user'] do
+group 'kibana group' do
   gid node['kibana']['gid']
+  group_name node['kibana']['user']
   action :create
   system true
 end
 
-user node['kibana']['user'] do
+user 'kibana user' do
+  username node['kibana']['user']
   comment 'Kibana User'
   home "#{node['kibana']['dir']}/kibana"
   shell '/bin/bash'
@@ -37,7 +39,8 @@ end
   end
 end
 
-directory node['kibana']['pid_path'] do
+directory 'create directory for kibana pid file' do
+  path node['kibana']['pid_path']
   mode 00755
   recursive true
 end
