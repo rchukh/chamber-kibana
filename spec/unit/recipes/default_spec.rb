@@ -15,14 +15,10 @@ describe 'chamber-kibana::default' do
     runner.node.set['kibana']['path']['logs'] = '/tmp/kibana/logs'
     runner.node.set['kibana']['pid_path'] = '/tmp/kibana/run'
     runner.node.set['kibana']['templates']['kibana_yml'] = '/tmp/kibana.yml.erb'
-
-
-
     runner.node.set['kibana']['version'] = '4.0.0'
     runner.node.set['kibana']['checksum'] = '0010e467d598b67ba442c2edc5c6df196e8734f826044a58e0da3490a1bb587a'
     runner.node.set['kibana']['host'] = 'http://download.elasticsearch.org'
     runner.node.set['kibana']['repository'] = 'kibana/kibana'
-
     runner.converge(described_recipe)
   end
 
@@ -42,14 +38,16 @@ describe 'chamber-kibana::default' do
 
   it 'creates a user with the default action' do
     expect(chef_run).to create_user('kibana user').with(
-     username: 'user',
-     comment: 'Kibana User',
-     home: '/tmp/kibana/dir/kibana',
-     shell: '/bin/bash',
-     uid: 'uid',
-     gid: 'user',
-     supports: {manage_home: false},
-     system: true
+      username: 'user',
+      comment: 'Kibana User',
+      home: '/tmp/kibana/dir/kibana',
+      shell: '/bin/bash',
+      uid: 'uid',
+      gid: 'user',
+      supports: {
+        manage_home: false
+      },
+      system: true
     )
   end
 
@@ -106,8 +104,7 @@ describe 'chamber-kibana::default' do
       prefix_root: '/tmp/kibana/dir',
       prefix_home: '/tmp/kibana/dir'
     }
-    expect(chef_run).to install_ark('kibana')
-    #.with(attributes)
+    expect(chef_run).to install_ark('kibana').with(attributes)
   end
 
   it 'creates kibana config from template' do
