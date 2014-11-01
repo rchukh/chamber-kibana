@@ -6,14 +6,14 @@ gem 'stove'
 gem 'berkshelf'
 
 group :lint do
-  gem 'foodcritic', '~> 4.0'
-  gem 'rubocop',    '~> 0.26'
+  gem 'foodcritic', '4.0'
+  gem 'rubocop',    '0.27'
 end
 
 group :unit do
   gem 'chef-sugar',  '~> 2.4'
   gem 'fuubar'
-  gem 'chefspec',  '~> 4.1'
+  gem 'chefspec',  '4.1.1'
 end
 
 group :integration do
