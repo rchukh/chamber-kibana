@@ -7,6 +7,8 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.3'
 
 supports 'centos'
+supports 'debian'
+supports 'ubuntu'
 
 recipe "chamber-kibana::default", <<-EOH
 Installs Kibana 4 (with or without dependencies).
