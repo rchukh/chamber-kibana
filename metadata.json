@@ -1,0 +1,41 @@
+{
+  "name": "chamber-kibana",
+  "description": "Set of recipes for installing Kibana 4",
+  "long_description": "Kibana 4 Cookbook\n===========\n\n[![Build Status](https://travis-ci.org/rchukh/chamber-kibana.svg)](https://travis-ci.org/rchukh/chamber-kibana)\n\nThe [Application Cookbook](http://blog.vialstudios.com/the-environment-cookbook-pattern/) for installing/configuring Kibana 4.\n\n> The cookbook tries to reuse the [ElasticSearch cookbook](https://github.com/elasticsearch/cookbook-elasticsearch/) approach to attributes/services/etc.\n\nRequirements\n============\n\n## Platforms\n\nThe following platforms are supported and tested under test kitchen:\n\n- CentOS 6.5\n- Ubuntu 14.04\n- Debian 7.7\n\nOther Debian and RHEL family distributions are assumed to work.\n\n## Cookbooks\n\n| Cookbook  | Status | Description | \n| ------------- | ------------- | ------------- | \n| ```chef-sugar``` | **required** | Used for some miscellaneous checks | \n| ```ark``` | **required** | Download and unpack of archive | \n| ```java``` | **required** | For installing Java - runtime dependency as of Kibana 4 | \n| ```line``` | **required** | For workaround of [hardcoded XMX in JAVA_OPTS](https://github.com/rchukh/chamber-kibana/issues/3) | \n| ```elasticsearch``` | recommended | ES may be located on other server, thus it is not a required dependency. | \n| ```logstash``` | suggested | Kibana 4 can work with any compatible ES index, thus logstash is not a required dependency. | \n\nAttributes\n============\n\nSee [attributes](attributes/default.rb).\n\n\nRecipes\n============\n\n| Recipe  | Description | \n| ------------- | ------------- | \n| ```chamber-kibana::default``` | Installs Kibana 4. | \n| ```chamber-kibana::dependencies``` | Installs only Kibana 4 dependencies. |\n",
+  "maintainer": "Roman Chukh",
+  "maintainer_email": "roman.chukh@gmail.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "centos": ">= 0.0.0",
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0"
+  },
+  "dependencies": {
+    "chef-sugar": "~> 2.4",
+    "line": "~> 0.5",
+    "ark": "~> 0.9",
+    "apt": "~> 2.6.0",
+    "java": "~> 1.29",
+    "elasticsearch": "~> 0.3.10"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+    "logstash": "~> 0.9.2"
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "chamber-kibana::default": "Installs Kibana 4 (with or without dependencies).\nSee attributes for attribute-control of installed dependencies.\n",
+    "chamber-kibana::dependencies": "Installs Kibana 4 dependencies (without Kibana 4 itself).\nSee attributes for attribute-control of installed dependencies.\n"
+  },
+  "version": "0.2.0"
+}

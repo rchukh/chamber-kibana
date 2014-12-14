@@ -1,3 +1,21 @@
+<a name="0.2.0"></a>
+## 0.2.0 (2014-12-14)
+
+
+#### Bug Fixes
+
+* test-kitchen fails for debian/ubuntu without_deps suite ([8e3ef418](https://github.com/rchukh/chamber-kibana/commit/8e3ef4181ad2c37d95d1983c6cfd314f0a8b8d47))
+* kibana service restart does not wait between stop and start ([1c0db81b](https://github.com/rchukh/chamber-kibana/commit/1c0db81b693b2012dbf42349b332b6dd5d54076f))
+* should fail on missing java during converge stage, not compile ([6a178a7c](https://github.com/rchukh/chamber-kibana/commit/6a178a7c42d6bda8d4caf1adb91c63ca50046af2))
+* metadata.json is not used after stove 3.2.3 update ([6371983b](https://github.com/rchukh/chamber-kibana/commit/6371983b5f094f16a2f4dcd38805885185d18496), closes [#14](https://github.com/rchukh/chamber-kibana/issues/14), [#16](https://github.com/rchukh/chamber-kibana/issues/16))
+
+
+#### Features
+
+* debian support ([f8378d96](https://github.com/rchukh/chamber-kibana/commit/f8378d96990828a80e9024817bdccbf34def585b))
+* ubuntu support ([f3c0a5ce](https://github.com/rchukh/chamber-kibana/commit/f3c0a5cea709975532bb40f90cb96ee415228f5f))
+
+
 <a name="0.1.2"></a>
 ### 0.1.2 (2014-10-18)
 
