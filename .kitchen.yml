@@ -10,6 +10,7 @@ driver_config:
         auto_detect: false
         enable:
           - yum
+          - apt
         generic_buckets:
           - ['chef', '/var/chef/cache']
   network:
@@ -27,6 +28,7 @@ provisioner:
 platforms:
   - name: centos-6.5
   - name: ubuntu-14.04
+  - name: debian-7.7
 
 suites:
   - name: default

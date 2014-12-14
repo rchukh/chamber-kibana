@@ -5,7 +5,7 @@
 include_recipe 'chef-sugar::default'
 
 if node['kibana']['dependency']['install_java']
-  if platform_family?('debian') then include_recipe 'apt::default' end
+  include_recipe 'apt::default' if debian?
   include_recipe 'java::default'
 else
   ruby_block 'check_java' do
