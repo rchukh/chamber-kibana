@@ -104,7 +104,7 @@ stop() {
 restart() {
     stop
     timeout=30
-    while ps aux | grep 'java' | grep -e "kibana.pidfile"; do
+    while ps aux | grep 'java' | grep 'kibana'; do
       echo -n '.'
       (( timeout-- ))
       if [ $timeout -lt '1' ]; then return; fi
