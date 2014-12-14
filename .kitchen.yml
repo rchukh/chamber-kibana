@@ -42,6 +42,7 @@ suites:
         allocated_memory: '128m'
   - name: without_deps
     run_list:
+      - recipe[apt::default]
       - recipe[java::default]
       - recipe[elasticsearch::default]
       - recipe[chamber-kibana::default]
