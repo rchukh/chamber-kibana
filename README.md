@@ -12,7 +12,13 @@ Requirements
 
 ## Platforms
 
-* CentOS 6.5
+The following platforms are supported and tested under test kitchen:
+
+- CentOS 6.5
+- Ubuntu 14.04
+- Debian 7.7
+
+Other Debian and RHEL family distributions are assumed to work.
 
 ## Cookbooks
 

@@ -10,6 +10,7 @@ driver_config:
         auto_detect: false
         enable:
           - yum
+          - apt
         generic_buckets:
           - ['chef', '/var/chef/cache']
   network:
@@ -26,6 +27,8 @@ provisioner:
 
 platforms:
   - name: centos-6.5
+  - name: ubuntu-14.04
+  - name: debian-7.7
 
 suites:
   - name: default
@@ -39,6 +42,7 @@ suites:
         allocated_memory: '128m'
   - name: without_deps
     run_list:
+      - recipe[apt::default]
       - recipe[java::default]
       - recipe[elasticsearch::default]
       - recipe[chamber-kibana::default]

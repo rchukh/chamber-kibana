@@ -47,12 +47,7 @@ start() {
 
     echo -en "\033[1mStarting Kibana...\033[0m"
     touch $PIDFILE && chown <%= node.kibana['user'] %> $PIDFILE
-    <% if node.platform_family == 'debian' %>
-      # TODO: Fix. Won't work, because of '-p' parameter
-      start-stop-daemon --background --start --quiet --pidfile $PIDFILE --chuid <%= node.kibana['user'] %> --exec <%= node.kibana['bindir'] %>/kibana -- -p $PIDFILE
-    <% else %>
-      su <%= node.kibana['user'] %> -c "nohup <%= node.kibana['bindir'] %>/kibana > <%= node.kibana['path']['logs'] %>/kibana.log 2>&1 & echo \$! > $PIDFILE"
-    <% end %>
+    su <%= node.kibana['user'] %> -c "nohup <%= node.kibana['bindir'] %>/kibana > <%= node.kibana['path']['logs'] %>/kibana.log 2>&1 & echo \$! > $PIDFILE"
 
     if [ $? ]; then
       echo -e " \e[32m[OK]\e[0m"
@@ -109,7 +104,7 @@ stop() {
 restart() {
     stop
     timeout=30
-    while ps aux | grep 'java' | grep -e "kibana.pidfile"; do
+    while ps aux | grep 'java' | grep 'kibana'; do
       echo -n '.'
       (( timeout-- ))
       if [ $timeout -lt '1' ]; then return; fi
