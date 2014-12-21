@@ -1,8 +1,8 @@
 # === VERSION AND LOCATION
 #
-default['kibana']['version']       = '4.0.0-BETA1.1'
+default['kibana']['version']       = '4.0.0-beta3'
 # sha256 ( shasum -a 256 FILENAME )
-default['kibana']['checksum']      = '0010e467d598b67ba442c2edc5c6df196e8734f826044a58e0da3490a1bb587a'
+default['kibana']['checksum']      = 'd593af567c5dd814e59fb2bc2e11a194add6caa0f58c54c82da8fb708554aded'
 default['kibana']['host']          = 'http://download.elasticsearch.org'
 default['kibana']['repository']    = 'kibana/kibana'
 default['kibana']['filename']      = nil
@@ -41,12 +41,25 @@ default['kibana']['skip_restart'] = false
 # === Kibana instance configurations
 #
 default['kibana']['java_opts'] = '-Xms128m -Xmx128m $JAVA_OPTS'
+# Kibana Host
+default['kibana']['http']['host'] = '0.0.0.0'
 # Kibana Port
 default['kibana']['http']['port'] = 5601
 # The Elasticsearch instance to use
 default['kibana']['elasticsearch']['server'] = 'http://127.0.0.1:9200'
 # Kibana uses an index in Elasticsearch to store saved searches, visualizations
 # and dashboards. It will create an new index if it doesn't already exist.
-default['kibana']['elasticsearch']['index'] = 'kibana-int'
-
-# TODO: Add loaded and default applications support
+default['kibana']['elasticsearch']['index'] = '.kibana'
+# The default application to load.
+default['kibana']['default_app_id'] = 'discover'
+# Time in seconds to wait for responses from the back end or elasticsearch.
+# Note this should always be higher than "shard_timeout".
+# This must be > 0
+default['kibana']['request_timeout'] = '60'
+# Time in milliseconds for Elasticsearch to wait for responses from shards.
+# Note this should always be lower than "request_timeout".
+# Set to 0 to disable (not recommended).
+default['kibana']['shard_timeout'] = '30000'
+# Set to false to have a complete disregard for the validity of the SSL
+# certificate.
+default['kibana']['verify_ssl'] = true

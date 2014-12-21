@@ -38,7 +38,7 @@ suites:
       java:
         jdk_version: '7'
       elasticsearch:
-        version: '1.4.0.Beta1'
+        version: '1.4.2'
         allocated_memory: '128m'
   - name: without_deps
     run_list:
@@ -50,7 +50,7 @@ suites:
       java:
         jdk_version: '7'
       elasticsearch:
-        version: '1.4.0.Beta1'
+        version: '1.4.2'
         allocated_memory: '128m'
       kibana:
         dependency:
