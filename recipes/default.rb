@@ -100,6 +100,11 @@ template 'kibana.yml' do
   notifies :restart, 'service[kibana]' unless node['kibana']['skip_restart']
 end
 
+# Note:
+#   The following code is a temporary solution.
+#   It may be changed/removed completely after Kibana 4 release (final, or at least RC).
+#
+
 # Fix: Workaround for hardcoded 512m memory requirement.
 # This will probably be configured in future beta versions of Kibana 4.
 #
@@ -107,4 +112,15 @@ replace_or_add 'Change hardcoded JAVA_OPTS in Kibana binary' do
   path "#{node['kibana']['bindir']}/kibana"
   pattern '^JAVA_OPTS=.*'
   line "JAVA_OPTS=\"#{node['kibana']['java_opts']}\""
+end
+
+kibana_config_original = "#{node['kibana']['dir']}/kibana/config/kibana.yml"
+file "Remove original kibana config - #{kibana_config_original}" do
+  path kibana_config_original
+  action :delete
+end
+
+link 'Link kibana configuration file' do
+  target_file kibana_config_original
+  to "#{node['kibana']['path']['conf']}/kibana.yml"
 end
