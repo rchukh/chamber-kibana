@@ -19,6 +19,6 @@ end
 group :integration do
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
-  gem 'busser-bats'
-  gem 'busser-minitest'
+  gem 'serverspec'
+  gem 'busser-serverspec'
 end
