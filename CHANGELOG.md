@@ -1,3 +1,24 @@
+<a name="0.2.1"></a>
+### 0.2.1 (2014-12-21)
+
+
+#### Bug Fixes
+
+* cookbooks kibana.yml is not used ([4f5567f1](https://github.com/rchukh/chamber-kibana/commit/4f5567f140eb25c12ec42afe7324650a10815ea9), closes [#28](https://github.com/rchukh/chamber-kibana/issues/28))
+
+
+#### Features
+
+* update to kibana 4.0.0-beta3 ([ed68fcfb](https://github.com/rchukh/chamber-kibana/commit/ed68fcfbac3a9f93ca707a42f5757c98e02cb040))
+
+
+#### Breaking Changes
+
+* kibana elasticsearch index property changed from
+'kibana-int' to '.kibana' to match default kibana configuration
+ ([ed68fcfb](https://github.com/rchukh/chamber-kibana/commit/ed68fcfbac3a9f93ca707a42f5757c98e02cb040))
+
+
 <a name="0.2.0"></a>
 ## 0.2.0 (2014-12-14)
 

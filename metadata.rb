@@ -4,7 +4,7 @@ maintainer_email 'roman.chukh@gmail.com'
 license          'Apache 2.0'
 description      'Set of recipes for installing Kibana 4'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.2.0'
+version          '0.2.1'
 
 supports 'centos'
 supports 'debian'

@@ -37,5 +37,5 @@
     "chamber-kibana::default": "Installs Kibana 4 (with or without dependencies).\nSee attributes for attribute-control of installed dependencies.\n",
     "chamber-kibana::dependencies": "Installs Kibana 4 dependencies (without Kibana 4 itself).\nSee attributes for attribute-control of installed dependencies.\n"
   },
-  "version": "0.2.0"
+  "version": "0.2.1"
 }
