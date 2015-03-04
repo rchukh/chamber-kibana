@@ -1,8 +1,8 @@
 # === VERSION AND LOCATION
 #
-default['kibana']['version']       = '4.0.0-beta3'
+default['kibana']['version']       = '4.0.0-linux-x64'
 # sha256 ( shasum -a 256 FILENAME )
-default['kibana']['checksum']      = 'd593af567c5dd814e59fb2bc2e11a194add6caa0f58c54c82da8fb708554aded'
+default['kibana']['checksum']      = '8f1de21f52803793dafeefe54f5b8933c2d3887ecbf69da6835430586b25cf2e'
 default['kibana']['host']          = 'http://download.elasticsearch.org'
 default['kibana']['repository']    = 'kibana/kibana'
 default['kibana']['filename']      = nil
