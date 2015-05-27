@@ -1,8 +1,8 @@
 # === VERSION AND LOCATION
 #
-default['kibana']['version']       = '4.0.0-beta3'
+default['kibana']['version']       = '4.0.2-linux-x64'
 # sha256 ( shasum -a 256 FILENAME )
-default['kibana']['checksum']      = 'd593af567c5dd814e59fb2bc2e11a194add6caa0f58c54c82da8fb708554aded'
+default['kibana']['checksum']      = '4cc36e5c6ca7c495667319df75feda1facb7c43a3d9686841f07a2522adec294'
 default['kibana']['host']          = 'http://download.elasticsearch.org'
 default['kibana']['repository']    = 'kibana/kibana'
 default['kibana']['filename']      = nil
@@ -55,7 +55,7 @@ default['kibana']['default_app_id'] = 'discover'
 # Time in seconds to wait for responses from the back end or elasticsearch.
 # Note this should always be higher than "shard_timeout".
 # This must be > 0
-default['kibana']['request_timeout'] = '60'
+default['kibana']['request_timeout'] = '300000'
 # Time in milliseconds for Elasticsearch to wait for responses from shards.
 # Note this should always be lower than "request_timeout".
 # Set to 0 to disable (not recommended).

@@ -15,8 +15,8 @@ describe 'chamber-kibana::default' do
     runner.node.set['kibana']['path']['logs'] = '/tmp/kibana/logs'
     runner.node.set['kibana']['pid_path'] = '/tmp/kibana/run'
     runner.node.set['kibana']['templates']['kibana_yml'] = '/tmp/kibana.yml.erb'
-    runner.node.set['kibana']['version'] = '4.0.0'
-    runner.node.set['kibana']['checksum'] = '0010e467d598b67ba442c2edc5c6df196e8734f826044a58e0da3490a1bb587a'
+    runner.node.set['kibana']['version'] = '4.0.1-linux-x64'
+    runner.node.set['kibana']['checksum'] = '7d3cbe26267b921487c0ad845fad26d4fbad9f0b296eb55997f0987987468a3f'
     runner.node.set['kibana']['host'] = 'http://download.elasticsearch.org'
     runner.node.set['kibana']['repository'] = 'kibana/kibana'
     runner.converge(described_recipe)

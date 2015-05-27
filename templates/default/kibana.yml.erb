@@ -5,7 +5,7 @@ port: <%= node.kibana['http']['port'] %>
 host: "<%= node.kibana['http']['host'] %>"
 
 # The Elasticsearch instance to use for all your queries.
-elasticsearch: "<%= node.kibana['elasticsearch']['server'] %>"
+elasticsearch_url: "<%= node.kibana['elasticsearch']['server'] %>"
 
 # Kibana uses an index in Elasticsearch to store saved searches, visualizations
 # and dashboards. It will create a new index if it doesn't already exist.
@@ -31,7 +31,7 @@ verify_ssl: <%= node.kibana['verify_ssl'] %>
 # TODO: Change to normalized name after this is released:
 # https://github.com/elasticsearch/kibana/pull/2373
 # Plugins that are included in the build, and no longer found in the plugins/ folder
-bundledPluginIds:
+bundled_plugin_ids:
  - plugins/dashboard/index
  - plugins/discover/index
  - plugins/doc/index
